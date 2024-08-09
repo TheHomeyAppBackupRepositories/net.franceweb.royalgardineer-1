@@ -1,0 +1,317 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "net.franceweb.royalgardineer",
+  "version": "1.0.4",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Royal Gardineer"
+  },
+  "brandColor": "#048D45",
+  "description": {
+    "en": "Your garden has never been so green",
+    "fr": "Votre jardin n'a jamais été aussi vert"
+  },
+  "category": [
+    "tools"
+  ],
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Serge PALUMBO"
+  },
+  "homeyCommunityTopicId": 103127,
+  "contributing": {
+    "donate": {
+      "paypal": {
+        "username": "SoPhosFR"
+      }
+    }
+  },
+  "support": "mailto:sophos@franceweb.net",
+  "flow": {
+    "actions": [
+      {
+        "id": "smart-irrigation-system-start-for-x-minutes",
+        "title": {
+          "en": "Start for (x) minutes",
+          "fr": "Arroser pendant (x) minutes"
+        },
+        "titleFormatted": {
+          "en": "Start for [[delay]] [[units]]",
+          "fr": "Arroser pendant [[delay]] [[units]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=irrigation-controller-ZX-7155-675"
+          },
+          {
+            "type": "number",
+            "name": "delay",
+            "placeholder": {
+              "en": "delay",
+              "fr": "durée"
+            },
+            "min": 1,
+            "max": 480,
+            "step": 1
+          },
+          {
+            "type": "dropdown",
+            "name": "units",
+            "placeholder": {
+              "en": "units",
+              "fr": "unités"
+            },
+            "values": [
+              {
+                "id": "s",
+                "title": {
+                  "en": "second(s)",
+                  "fr": "seconde(s)"
+                }
+              },
+              {
+                "id": "m",
+                "title": {
+                  "en": "minute(s)",
+                  "fr": "minute(s)"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "name": {
+        "en": "Irrigation Controller"
+      },
+      "class": "other",
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "zigbee"
+      ],
+      "capabilities": [
+        "onoff",
+        "sensor_lastdate",
+        "sensor_lasttime",
+        "sensor_wateringtime",
+        "sensor_remainingtime",
+        "measure_battery"
+      ],
+      "energy": {
+        "batteries": [
+          "AA",
+          "AA"
+        ]
+      },
+      "zigbee": {
+        "manufacturerName": [
+          "_TZE200_2wg5qrjy",
+          "_TZE200_akjefhj5"
+        ],
+        "productId": [
+          "TS0601"
+        ],
+        "learnmode": {
+          "image": "/drivers/irrigation-controller-ZX-7155-675/assets/learnmode.svg",
+          "instruction": {
+            "en": "Press the button on your device for 5 seconds until the led flashes",
+            "fr": "Appuyez sur le bouton pendant 5 secondes jusqu'à ce que la led clignote"
+          }
+        },
+        "endpoints": {
+          "1": {
+            "clusters": [
+              0,
+              4,
+              5,
+              6,
+              61184
+            ],
+            "bindings": [
+              0,
+              4,
+              5,
+              6,
+              61184
+            ]
+          }
+        }
+      },
+      "images": {
+        "small": "/drivers/irrigation-controller-ZX-7155-675/assets/images/small.png",
+        "large": "/drivers/irrigation-controller-ZX-7155-675/assets/images/large.png"
+      },
+      "id": "irrigation-controller-ZX-7155-675",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Settings",
+            "fr": "Paramètres"
+          },
+          "children": [
+            {
+              "id": "max_watering_time",
+              "type": "number",
+              "label": {
+                "en": "Max watering time (m)",
+                "fr": "Durée max d'arrosage (m)"
+              },
+              "hint": {
+                "en": "Max watering time if no delay is defined (default: 10 min)",
+                "fr": "Durée maximale d'arrosage si aucun délai n'est indiqué (défaut: 10 min)"
+              },
+              "value": 10,
+              "attr": {
+                "min": 1,
+                "max": 300,
+                "step": 1
+              }
+            },
+            {
+              "id": "max_manual_watering_time",
+              "type": "number",
+              "label": {
+                "en": "Max watering time in manual mode (m)",
+                "fr": "Durée max d'arrosage en manuel (m)"
+              },
+              "hint": {
+                "en": "Max watering time if device button is pressed (default: 10 min)",
+                "fr": "Durée maximale d'arrosage quand le bouton du périphérique est appuyé (défaut: 10 min)"
+              },
+              "value": 10,
+              "attr": {
+                "min": 1,
+                "max": 300,
+                "step": 1
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Informations",
+            "fr": "Informations"
+          },
+          "children": [
+            {
+              "id": "last_measure_battery",
+              "type": "label",
+              "label": {
+                "en": "Last battery reporting",
+                "fr": "Dernière mesure de batterie"
+              },
+              "value": "",
+              "hint": {
+                "en": "Last battery reporting date and time",
+                "fr": "Date et heure de la dernière mesure de batterie"
+              }
+            },
+            {
+              "id": "last_unknown_value",
+              "type": "textarea",
+              "label": {
+                "en": "Unknown values log",
+                "fr": "Logs valeurs inconnues"
+              },
+              "value": "",
+              "hint": {
+                "en": "Last unknown values reported by device",
+                "fr": "Dernières valeurs inconnues retournée par le périphérique"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "capabilities": {
+    "sensor_lastdate": {
+      "id": "sensor_lastdate",
+      "type": "string",
+      "title": {
+        "en": "Last watering",
+        "fr": "Dernier arrosage",
+        "es": "Ultimo riego"
+      },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "icon": "/assets/calendar.svg"
+    },
+    "sensor_lasttime": {
+      "id": "sensor_lasttime",
+      "type": "string",
+      "title": {
+        "en": "Last duration",
+        "fr": "Dernière durée",
+        "es": "Retraso anterior"
+      },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "icon": "/assets/time.svg"
+    },
+    "sensor_power": {
+      "id": "sensor_power",
+      "type": "boolean",
+      "title": {
+        "en": "Turned on",
+        "fr": "Activé",
+        "es": "Activado"
+      },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "icon": "/assets/icon_power.svg"
+    },
+    "sensor_remainingtime": {
+      "id": "sensor_remainingtime",
+      "type": "string",
+      "title": {
+        "en": "Remaining watering",
+        "fr": "Arrosage restant",
+        "es": "Riego restante"
+      },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "icon": "/assets/icon_sprinkler-with-time.svg"
+    },
+    "sensor_wateringtime": {
+      "id": "sensor_wateringtime",
+      "type": "string",
+      "title": {
+        "en": "Scheduled watering",
+        "fr": "Arrosage en cours",
+        "es": "Riego programado"
+      },
+      "uiComponent": "sensor",
+      "getable": true,
+      "setable": false,
+      "insights": true,
+      "icon": "/assets/icon_sprinkler.svg"
+    }
+  }
+}
